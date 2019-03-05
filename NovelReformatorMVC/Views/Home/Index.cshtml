@@ -13,9 +13,10 @@
     <pre>@Model.Content</pre>
 }
 <form asp-action="Index" method="post">
+    <div asp-validation-summary="All"></div>
     <p>
         <label asp-for="Name">Name:</label>
-        <input type="text" asp-for="Name" />
+        <input type="text" asp-for="Name"/>
     </p>
     <p>
         <label asp-for="Content">Content:</label>

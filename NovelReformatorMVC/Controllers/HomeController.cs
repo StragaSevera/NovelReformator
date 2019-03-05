@@ -14,6 +14,7 @@ namespace NovelReformatorMVC.Controllers
         [HttpPost]
         public IActionResult Index(Novel novel)
         {
+            if (!ModelState.IsValid) return View();
             novel.Content = "Reformatted content: \n" + novel.Content;
             return View(novel);
         }
