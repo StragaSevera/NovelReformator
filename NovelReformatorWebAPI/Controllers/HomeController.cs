@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NovelReformatorWebAPI.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class HomeController : ControllerBase
     {
         // GET api/home

@@ -26,10 +26,7 @@ namespace NovelReformatorWebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("default", "api/{controller}/{action=Get}");
-            });
+            app.UseMvc();
         }
     }
 }
