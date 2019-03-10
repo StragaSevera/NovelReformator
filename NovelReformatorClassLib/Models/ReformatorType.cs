@@ -2,6 +2,8 @@
 {
     public enum ReformatorType
     {
-        FanficsMe, FicBook, SamLib
+        FanficsMe,
+        FicBook,
+        SamLib
     }
 }

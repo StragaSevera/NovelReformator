@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NovelReformatorClassLib.Models;
-using NovelReformatorMVC.Models;
 using NovelReformatorMVC.Services;
 
 namespace NovelReformatorMVC.Controllers
@@ -19,25 +18,11 @@ namespace NovelReformatorMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Index(Novel novel)
-        {
-            if (!ModelState.IsValid) return View();
-            novel.Content = "Reformatted content: \n" + novel.Content;
-            return View(novel);
-        }
-
-        [HttpGet]
-        public IActionResult Reformat()
-        {
             return View((new ApiRequest(), (ApiResponse) null));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Reformat(ApiRequest apiRequest)
+        public async Task<IActionResult> Index(ApiRequest apiRequest)
         {
             if (!ModelState.IsValid) return View();
             ApiResponse apiResponse = null;
