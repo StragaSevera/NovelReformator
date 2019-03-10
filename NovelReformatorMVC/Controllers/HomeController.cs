@@ -1,8 +1,7 @@
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NovelReformatorClassLib;
+using NovelReformatorClassLib.Models;
 using NovelReformatorMVC.Models;
 using NovelReformatorMVC.Services;
 
@@ -43,7 +42,7 @@ namespace NovelReformatorMVC.Controllers
             if (!ModelState.IsValid) return View();
             try
             {
-                ViewBag.Text = await _reformator.Reformat(apiRequest.Content, apiRequest.Type);
+                ViewBag.Text = await _reformator.Reformat(apiRequest);
             }
             catch (Exception e)
             {

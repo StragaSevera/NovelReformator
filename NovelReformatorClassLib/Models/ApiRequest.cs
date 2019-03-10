@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using NovelReformatorClassLib;
 
-namespace NovelReformatorMVC.Models
+namespace NovelReformatorClassLib.Models
 {
     public class ApiRequest
     {

@@ -1,7 +1,5 @@
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NovelReformatorClassLib.Models;
 
 namespace NovelReformatorWebAPI.Controllers
 {
@@ -9,15 +7,10 @@ namespace NovelReformatorWebAPI.Controllers
     [ApiController]
     public class ReformatController : Controller
     {
-        [HttpPost("{type}")]
-        public async Task<string> Index(string type)
+        [HttpPost]
+        public string Index(ApiRequest apiRequest)
         {
-            // Некрасиво, но через [FromBody] выдает 415 - есть ли способы лучше для принятия text/plain ?
-            using (var reader = new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                var input = await reader.ReadToEndAsync();
-                return type + ": " + input;
-            }
+            return apiRequest.Type + ": " + apiRequest.Content;
         }
     }
 }

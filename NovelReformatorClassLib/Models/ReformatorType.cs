@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NovelReformatorClassLib
+﻿namespace NovelReformatorClassLib.Models
 {
     public enum ReformatorType
     {
