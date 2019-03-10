@@ -1,0 +1,14 @@
+@model ApiResponse
+
+@if (Model != null)
+{
+    if (Model.Success)
+    {
+        <h1>Request content:</h1>
+        <pre>@Model.Content</pre>
+    }
+    else {
+        <h1>Request content:</h1>
+        <pre>Request unsuccessful</pre>
+    }
+}

@@ -1,0 +1,16 @@
+@model ApiRequest
+
+<form asp-action="Reformat" method="post">
+    <div asp-validation-summary="All"></div>
+    <p>
+        <label asp-for="Content">Content:</label><br/>
+        <textarea asp-for="Content"></textarea>
+    </p>
+    <p>
+        <label asp-for="Type">Type:</label><br/>
+        <select asp-for="Type"
+                asp-items="Html.GetEnumSelectList<ReformatorType>()">
+        </select>
+    </p>
+    <button type="submit">Submit</button>
+</form>
