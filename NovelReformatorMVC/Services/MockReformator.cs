@@ -7,11 +7,14 @@ namespace NovelReformatorMVC.Services
 {
     internal class MockReformator : IReformatorService
     {
-        public Task<string> Reformat(ApiRequest apiRequest)
+        public Task<ApiResponse> Reformat(ApiRequest apiRequest)
         {
             Debug.WriteLine($"Mocking reformatting service: type is {apiRequest.Type}, " +
                             $"content is {apiRequest.Content}");
-            return Task.FromResult(apiRequest.Type + ": " + apiRequest.Content);
+            return Task.FromResult(new ApiResponse {
+                Content = apiRequest.Type + ": " + apiRequest.Content,
+                Success = true
+            });
         }
     }
 }

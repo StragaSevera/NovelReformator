@@ -33,23 +33,24 @@ namespace NovelReformatorMVC.Controllers
         [HttpGet]
         public IActionResult Reformat()
         {
-            return View();
+            return View((new ApiRequest(), (ApiResponse) null));
         }
 
         [HttpPost]
         public async Task<IActionResult> Reformat(ApiRequest apiRequest)
         {
             if (!ModelState.IsValid) return View();
+            ApiResponse apiResponse = null;
             try
             {
-                ViewBag.Text = await _reformator.Reformat(apiRequest);
+                apiResponse = await _reformator.Reformat(apiRequest);
             }
             catch (Exception e)
             {
-                ViewBag.Text = e.ToString();
+                ViewBag.Error = e.ToString();
             }
 
-            return View(apiRequest);
+            return View((apiRequest, apiResponse));
         }
     }
 }

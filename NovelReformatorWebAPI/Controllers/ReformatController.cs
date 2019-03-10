@@ -8,9 +8,13 @@ namespace NovelReformatorWebAPI.Controllers
     public class ReformatController : Controller
     {
         [HttpPost]
-        public string Index(ApiRequest apiRequest)
+        public ApiResponse Index(ApiRequest apiRequest)
         {
-            return apiRequest.Type + ": " + apiRequest.Content;
+            return new ApiResponse
+            {
+                Content = apiRequest.Type + ": " + apiRequest.Content,
+                Success = apiRequest.Type != ReformatorType.FicBook
+            };
         }
     }
 }

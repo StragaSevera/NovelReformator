@@ -1,5 +1,4 @@
-@using NovelReformatorClassLib.Models
-@model NovelReformatorClassLib.Models.ApiRequest
+@model ValueTuple<ApiRequest, ApiResponse>
 
 <!DOCTYPE html>
 
@@ -8,20 +7,34 @@
     <title>Api Request</title>
 </head>
 <body>
-@if (ViewBag.Text != null)
+@if (Model.Item2 != null)
 {
-    <h1>Request content:</h1>
-    <pre>@ViewBag.Text</pre>
+    if (Model.Item2.Success)
+    {
+        <h1>Request content:</h1>
+        <pre>@Model.Item2.Content</pre>
+    }
+    else {
+        <h1>Request content:</h1>
+        <pre>Request unsuccessful</pre>
+    }
 }
+
+@if (ViewBag.Error != null)
+{
+    <h1>Error:</h1>
+    <pre>@ViewBag.Error</pre>
+}
+
 <form asp-action="Reformat" method="post">
     <div asp-validation-summary="All"></div>
     <p>
-        <label asp-for="Content">Content:</label><br/>
-        <textarea asp-for="Content"></textarea>
+        <label asp-for="Item1.Content">Content:</label><br/>
+        <textarea asp-for="Item1.Content"></textarea>
     </p>
     <p>
-        <label asp-for="Type">Type:</label><br/>
-        <select asp-for="Type"
+        <label asp-for="Item1.Type">Type:</label><br/>
+        <select asp-for="Item1.Type"
                 asp-items="Html.GetEnumSelectList<ReformatorType>()">
         </select>
     </p>
