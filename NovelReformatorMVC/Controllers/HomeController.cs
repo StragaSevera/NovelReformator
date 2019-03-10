@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -40,19 +41,16 @@ namespace NovelReformatorMVC.Controllers
         public async Task<IActionResult> Reformat(ApiRequest apiRequest)
         {
             if (!ModelState.IsValid) return View();
-            ViewBag.Text = await _reformator.Reformat(apiRequest.Content, apiRequest.Type);
-            return View(apiRequest);
+            try
+            {
+                ViewBag.Text = await _reformator.Reformat(apiRequest.Content, apiRequest.Type);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Text = e.ToString();
+            }
 
-            // По-хорошему, нужно сделать отдельный сервисный объект, а не дергать прямо отсюда HTTP
-//            using (var httpClient = new HttpClient())
-//            using (var request = new HttpRequestMessage(HttpMethod.Get,
-//                $"https://localhost:5003/api/home/{apiRequest.Content}"))
-//            using (var response = await httpClient.SendAsync(request))
-//            {
-//                response.EnsureSuccessStatusCode(); // Вместо этого можно проверять статус вручную во View
-//                apiRequest.Content = await response.Content.ReadAsStringAsync();
-//                return View(apiRequest);
-//            }
+            return View(apiRequest);
         }
     }
 }
