@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using NovelReformatorClassLib;
 
 namespace NovelReformatorMVC.Models
 {
@@ -6,5 +7,7 @@ namespace NovelReformatorMVC.Models
     {
         [Required]
         public string Content { get; set; }
+        [Required]
+        public ReformatorType Type { get; set; }
     }
 }

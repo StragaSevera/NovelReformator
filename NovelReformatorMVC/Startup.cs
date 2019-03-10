@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using NovelReformatorMVC.Services;
 
 namespace NovelReformatorMVC
 {
@@ -17,6 +18,8 @@ namespace NovelReformatorMVC
         {
             services.AddRouting(options => options.LowercaseUrls = true); // Force lowercase in URL
             services.AddMvc();
+
+            services.AddTransient<IReformatorService, MockReformator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,12 +1,21 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NovelReformatorClassLib;
 using NovelReformatorMVC.Models;
+using NovelReformatorMVC.Services;
 
 namespace NovelReformatorMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IReformatorService _reformator;
+
+        public HomeController(IReformatorService reformator)
+        {
+            _reformator = reformator;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -22,26 +31,28 @@ namespace NovelReformatorMVC.Controllers
         }
 
         [HttpGet]
-        public new IActionResult Request()
+        public IActionResult Reformat()
         {
             return View();
         }
 
         [HttpPost]
-        // ReSharper почему-то считает этот new излишним, хотя без него выдается warning
-        public new async Task<IActionResult> Request(ApiRequest apiRequest)
+        public async Task<IActionResult> Reformat(ApiRequest apiRequest)
         {
             if (!ModelState.IsValid) return View();
+            ViewBag.Text = await _reformator.Reformat(apiRequest.Content, apiRequest.Type);
+            return View(apiRequest);
+
             // По-хорошему, нужно сделать отдельный сервисный объект, а не дергать прямо отсюда HTTP
-            using (var httpClient = new HttpClient())
-            using (var request = new HttpRequestMessage(HttpMethod.Get,
-                $"https://localhost:5003/api/home/{apiRequest.Content}"))
-            using (var response = await httpClient.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode(); // Вместо этого можно проверять статус вручную во View
-                apiRequest.Content = await response.Content.ReadAsStringAsync();
-                return View(apiRequest);
-            }
+//            using (var httpClient = new HttpClient())
+//            using (var request = new HttpRequestMessage(HttpMethod.Get,
+//                $"https://localhost:5003/api/home/{apiRequest.Content}"))
+//            using (var response = await httpClient.SendAsync(request))
+//            {
+//                response.EnsureSuccessStatusCode(); // Вместо этого можно проверять статус вручную во View
+//                apiRequest.Content = await response.Content.ReadAsStringAsync();
+//                return View(apiRequest);
+//            }
         }
     }
 }

@@ -1,0 +1,30 @@
+@model ApiRequest
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Api Request</title>
+</head>
+<body>
+@if (ViewBag.Text != null)
+{
+    <h1>Request content:</h1>
+    <pre>@ViewBag.Text</pre>
+}
+<form asp-action="Reformat" method="post">
+    <div asp-validation-summary="All"></div>
+    <p>
+        <label asp-for="Content">Content:</label><br/>
+        <textarea asp-for="Content"></textarea>
+    </p>
+    <p>
+        <label asp-for="Type">Type:</label><br/>
+        <select asp-for="Type"
+                asp-items="Html.GetEnumSelectList<ReformatorType>()">
+        </select>
+    </p>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
