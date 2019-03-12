@@ -7,5 +7,10 @@ namespace NovelReformatorClassLib.Models
         [Required] public string Content { get; set; }
 
         public bool Success { get; set; }
+        
+        public override string ToString()
+        {
+            return Success ? $"Successfully converted:\n{Content}" : "Conversion failed!";
+        }
     }
 }

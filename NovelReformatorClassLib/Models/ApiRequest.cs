@@ -7,5 +7,10 @@ namespace NovelReformatorClassLib.Models
         [Required] public string Content { get; set; }
 
         [Required] public ReformatorType Type { get; set; }
+
+        public override string ToString()
+        {
+            return $"Convert to {Type}:\n{Content}";
+        }
     }
 }
