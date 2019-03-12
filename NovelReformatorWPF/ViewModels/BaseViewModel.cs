@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace NovelReformatorWPF.ViewModels
 {
-    public class BaseViewModel
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
