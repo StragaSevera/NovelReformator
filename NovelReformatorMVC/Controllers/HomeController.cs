@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NovelReformatorClassLib.Models;
+using NovelReformatorMVC.Models.ViewModels;
 using NovelReformatorMVC.Services;
 
 namespace NovelReformatorMVC.Controllers
@@ -18,7 +19,7 @@ namespace NovelReformatorMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View((new ApiRequest(), (ApiResponse) null));
+            return View(new RequestResponseComposite());
         }
 
         [HttpPost]
@@ -35,7 +36,7 @@ namespace NovelReformatorMVC.Controllers
                 ViewBag.Error = e.ToString();
             }
 
-            return View((apiRequest, apiResponse));
+            return View(new RequestResponseComposite(apiRequest, apiResponse));
         }
     }
 }

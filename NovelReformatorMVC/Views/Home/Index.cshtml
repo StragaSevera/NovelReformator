@@ -1,4 +1,4 @@
-@model ValueTuple<ApiRequest, ApiResponse>
+@model RequestResponseComposite
 
 <!DOCTYPE html>
 
@@ -8,7 +8,7 @@
 </head>
 <body>
 <partial name="_ReformatError.cshtml" model="ViewBag.Error"/>
-<partial name="_ReformatResponse.cshtml" model="Model.Item2"/>
-<partial name="_ReformatForm.cshtml" model="Model.Item1"/>
+<partial name="_ReformatResponse.cshtml" model="Model.Response"/>
+<partial name="_ReformatForm.cshtml" model="Model.Request"/>
 </body>
 </html>
