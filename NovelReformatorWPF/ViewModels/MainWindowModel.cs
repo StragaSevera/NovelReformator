@@ -11,11 +11,7 @@ namespace NovelReformatorWPF.ViewModels
         public string Request
         {
             get => _request;
-            private set
-            {
-                _request = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _request, value);
         }
 
         private string _response;
@@ -23,11 +19,7 @@ namespace NovelReformatorWPF.ViewModels
         public string Response
         {
             get => _response;
-            set
-            {
-                _response = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _response, value);
         }
 
         public ICommand SendRequest { get; }
@@ -42,7 +34,7 @@ namespace NovelReformatorWPF.ViewModels
 
         private void OnSendRequest(object o)
         {
-            _response = _requestSender.SendRequest(_request);
+            Response = _requestSender.SendRequest(Request);
         }
     }
 }

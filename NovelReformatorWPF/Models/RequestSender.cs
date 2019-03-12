@@ -4,7 +4,7 @@ namespace NovelReformatorWPF.Models
     {
         public string SendRequest(string request)
         {
-            return "LUL";
+            return "Response to request: " + request;
         }
     }
 }
