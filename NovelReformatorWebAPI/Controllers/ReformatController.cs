@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NovelReformatorClassLib.Models;
 using NovelReformatorWebAPI.Services;
+using NovelReformatorWebAPI.Services.Events;
+using Prism.Events;
 
 namespace NovelReformatorWebAPI.Controllers
 {
@@ -9,24 +10,24 @@ namespace NovelReformatorWebAPI.Controllers
     [ApiController]
     public class ReformatController : Controller
     {
-        private readonly LoggerService _logger;
+        private readonly IEventAggregator _aggregator;
 
-        public ReformatController(LoggerService logger)
+        public ReformatController(IEventAggregator aggregator)
         {
-            _logger = logger;
+            _aggregator = aggregator;
         }
 
         [HttpPost]
         public ApiResponse Index(ApiRequest apiRequest)
         {
-            _logger.LogRequest(apiRequest);
-            var response = new ApiResponse
+            _aggregator.GetEvent<LogRequestEvent>().Publish(apiRequest);
+            var apiResponse = new ApiResponse
             {
                 Content = apiRequest.Type + ": " + apiRequest.Content,
                 Success = apiRequest.Type != ReformatorType.FicBook
             };
-            _logger.LogResponse(response);
-            return response;
+            _aggregator.GetEvent<LogResponseEvent>().Publish(apiResponse);
+            return apiResponse;
         }
     }
 }
