@@ -6,9 +6,16 @@ namespace NovelReformatorMVC.Services
 {
     internal class ApiReformator : IReformatorService
     {
+        private readonly string _baseUrl;
+
+        public ApiReformator(string baseUrl)
+        {
+            _baseUrl = baseUrl;
+        }
+        
         public async Task<ApiResponse> Reformat(ApiRequest apiRequest)
         {
-            const string url = "https://localhost:5003/api/reformat";
+            var url = _baseUrl;
             using (var httpClient = new HttpClient())
             using (var response = await httpClient.PostAsJsonAsync(url, apiRequest))
             {
