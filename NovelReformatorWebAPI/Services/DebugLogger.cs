@@ -7,14 +7,18 @@ namespace NovelReformatorWebAPI.Services
 {
     public class DebugLogger : LoggerService
     {
-        public override void LogRequest(ApiRequest request, HttpContext context)
+        public DebugLogger(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
-            Debug.WriteLine($"[{DateTime.Now}] {GetIp(context)}: {request}");
         }
 
-        public override void LogResponse(ApiResponse response, HttpContext context)
+        public override void LogRequest(ApiRequest request)
         {
-            Debug.WriteLine($"[{DateTime.Now}] {GetIp(context)}: {response}");
+            Debug.WriteLine($"[{DateTime.Now}] {GetIp()}: {request}");
+        }
+
+        public override void LogResponse(ApiResponse response)
+        {
+            Debug.WriteLine($"[{DateTime.Now}] {GetIp()}: {response}");
         }
     }
 }

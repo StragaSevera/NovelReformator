@@ -5,12 +5,20 @@ namespace NovelReformatorWebAPI.Services
 {
     public abstract class LoggerService
     {
-        public abstract void LogRequest(ApiRequest request, HttpContext context);
-        public abstract void LogResponse(ApiResponse response, HttpContext context);
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        protected HttpContext HttpContext => _httpContextAccessor.HttpContext;
 
-        protected static string GetIp(HttpContext context)
+        protected LoggerService(IHttpContextAccessor httpContextAccessor)
         {
-            var ip = context.Connection.RemoteIpAddress.ToString();
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        public abstract void LogRequest(ApiRequest request);
+        public abstract void LogResponse(ApiResponse response);
+
+        protected string GetIp()
+        {
+            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             return ip == "::1" ? "127.0.0.1" : ip;
         }
     }

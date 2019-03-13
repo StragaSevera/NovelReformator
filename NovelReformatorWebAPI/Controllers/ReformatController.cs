@@ -10,24 +10,22 @@ namespace NovelReformatorWebAPI.Controllers
     public class ReformatController : Controller
     {
         private readonly LoggerService _logger;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ReformatController(LoggerService logger, IHttpContextAccessor httpContextAccessor)
+        public ReformatController(LoggerService logger)
         {
             _logger = logger;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost]
         public ApiResponse Index(ApiRequest apiRequest)
         {
-            _logger.LogRequest(apiRequest, _httpContextAccessor.HttpContext);
+            _logger.LogRequest(apiRequest);
             var response = new ApiResponse
             {
                 Content = apiRequest.Type + ": " + apiRequest.Content,
                 Success = apiRequest.Type != ReformatorType.FicBook
             };
-            _logger.LogResponse(response, _httpContextAccessor.HttpContext);
+            _logger.LogResponse(response);
             return response;
         }
     }
