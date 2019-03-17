@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using NovelReformatorClassLib.Models;
 using NovelReformatorWebAPI.Data;
 using NovelReformatorWebAPI.Models;
@@ -10,36 +11,38 @@ namespace NovelReformatorWebAPI.Services
 {
     public class DbLogger : LoggerService
     {
-        private readonly ReformatorContext _context;
+        private readonly IServiceScopeFactory _scopeFactory;
 
         public DbLogger(IEventAggregator aggregator, IHttpContextAccessor httpContextAccessor,
-            ReformatorContext context) : base(aggregator, httpContextAccessor)
+            IServiceScopeFactory scopeFactory) : base(aggregator, httpContextAccessor)
         {
-            _context = context;
+            _scopeFactory = scopeFactory;
         }
 
         protected override void LogRequest(ApiRequest request)
         {
-            _context.LogEntries.Add(new LogEntry
-            {
-                Type = LogEntryType.Request,
-                CreatedAt = DateTime.Now,
-                IP = GetIp(),
-                Content = request.ToString()
-            });
-            _context.SaveChanges();
+            Log(LogEntryType.Request, request.ToString());
         }
 
         protected override void LogResponse(ApiResponse response)
         {
-            _context.LogEntries.Add(new LogEntry
+            Log(LogEntryType.Response, response.ToString());
+        }
+
+        private void Log(LogEntryType type, string content)
+        {
+            using (var scope = _scopeFactory.CreateScope())
             {
-                Type = LogEntryType.Response,
-                CreatedAt = DateTime.Now,
-                IP = GetIp(),
-                Content = response.ToString()
-            });
-            _context.SaveChanges();
+                var context = scope.ServiceProvider.GetService<ReformatorContext>();
+                context.LogEntries.Add(new LogEntry
+                {
+                    Type = type,
+                    CreatedAt = DateTime.Now,
+                    IP = GetIp(),
+                    Content = content
+                });
+                context.SaveChanges();
+            }
         }
     }
 }
