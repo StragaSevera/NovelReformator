@@ -12,7 +12,7 @@ namespace NovelReformatorWebAPI.Controllers
     {
         private readonly IEventAggregator _aggregator;
 
-        public ReformatController(IEventAggregator aggregator)
+        public ReformatController(IEventAggregator aggregator, DummyService dummy)
         {
             _aggregator = aggregator;
         }

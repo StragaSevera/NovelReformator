@@ -26,9 +26,10 @@ namespace NovelReformatorWebAPI
             services.AddHttpContextAccessor();
 
 
-            services.AddSingleton<IEventAggregator, EventAggregator>(); // можно ли сделать его Transient?
+            services.AddSingleton<IEventAggregator, EventAggregator>();
 //            services.AddSingleton<LoggerService, DebugLogger>();
-            services.AddSingleton<LoggerService, DbLogger>();
+            services.AddScoped<LoggerService, DbLogger>();
+            services.AddScoped<DummyService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -36,7 +37,6 @@ namespace NovelReformatorWebAPI
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseMvc();
-            app.ApplicationServices.GetService<LoggerService>();
         }
     }
 }
