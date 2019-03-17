@@ -11,10 +11,19 @@ namespace NovelReformatorWebAPI.Controllers
     public class ReformatController : Controller
     {
         private readonly IEventAggregator _aggregator;
+        private readonly IRequestServiceFactory _serviceFactory;
 
-        public ReformatController(IEventAggregator aggregator)
+        public ReformatController(IEventAggregator aggregator, IRequestServiceFactory serviceFactory)
         {
             _aggregator = aggregator;
+            _serviceFactory = serviceFactory;
+            _serviceFactory.InitializeRequestServices();
+        }
+
+        public new void Dispose()
+        {
+            base.Dispose();
+            _serviceFactory.Dispose();
         }
 
         [HttpPost]
