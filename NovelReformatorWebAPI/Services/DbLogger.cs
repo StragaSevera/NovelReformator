@@ -1,47 +1,49 @@
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using NovelReformatorClassLib.Models;
 using NovelReformatorWebAPI.Data;
 using NovelReformatorWebAPI.Models;
+using NovelReformatorWebAPI.Repositories;
 using Prism.Events;
 
 namespace NovelReformatorWebAPI.Services
 {
     public class DbLogger : LoggerService
     {
-        private readonly IServiceScopeFactory _scopeFactory;
+        private readonly IServiceProvider _scopeFactory;
 
         public DbLogger(IEventAggregator aggregator, IHttpContextAccessor httpContextAccessor,
-            IServiceScopeFactory scopeFactory) : base(aggregator, httpContextAccessor)
+            IServiceProvider provider) : base(aggregator, httpContextAccessor)
         {
-            _scopeFactory = scopeFactory;
+            _scopeFactory = provider;
         }
 
-        protected override void LogRequest(ApiRequest request)
+        protected override async void LogRequest(ApiRequest request)
         {
-            Log(LogEntryType.Request, request.ToString());
+            await Log(LogEntryType.Request, request.ToString());
         }
 
-        protected override void LogResponse(ApiResponse response)
+        protected override async void LogResponse(ApiResponse response)
         {
-            Log(LogEntryType.Response, response.ToString());
+            await Log(LogEntryType.Response, response.ToString());
         }
 
-        private void Log(LogEntryType type, string content)
+        private Task Log(LogEntryType type, string content)
         {
             using (var scope = _scopeFactory.CreateScope())
             {
-                var context = scope.ServiceProvider.GetService<ReformatorContext>();
-                context.LogEntries.Add(new LogEntry
+                var repo = scope.ServiceProvider.GetService<IGenericRepository<LogEntry>>();
+                repo.Add(new LogEntry
                 {
                     Type = type,
                     CreatedAt = DateTime.Now,
                     IP = GetIp(),
                     Content = content
                 });
-                context.SaveChanges();
+                return repo.SaveAsync();
             }
         }
     }

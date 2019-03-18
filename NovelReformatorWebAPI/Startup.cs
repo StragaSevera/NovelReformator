@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NovelReformatorWebAPI.Data;
+using NovelReformatorWebAPI.Models;
+using NovelReformatorWebAPI.Repositories;
 using NovelReformatorWebAPI.Services;
 using Prism.Events;
 
@@ -26,9 +28,10 @@ namespace NovelReformatorWebAPI
             services.AddHttpContextAccessor();
 
 
-            services.AddSingleton<IEventAggregator, EventAggregator>(); // можно ли сделать его Transient?
-//            services.AddSingleton<LoggerService, DebugLogger>();
+            services.AddSingleton<IEventAggregator, EventAggregator>();
             services.AddSingleton<LoggerService, DbLogger>();
+            // Не Transient, ибо требует контекста, а он Scoped
+            services.AddScoped<IGenericRepository<LogEntry>, LogEntryRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
