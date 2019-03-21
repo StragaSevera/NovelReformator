@@ -12,7 +12,7 @@ namespace NovelReformatorMVC.Services
         {
             _baseUrl = baseUrl;
         }
-        
+
         public async Task<ApiResponse> Reformat(ApiRequest apiRequest)
         {
             var url = _baseUrl;

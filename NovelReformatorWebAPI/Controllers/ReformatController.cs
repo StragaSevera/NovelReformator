@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using NovelReformatorClassLib.Models;
-using NovelReformatorWebAPI.Services;
 using NovelReformatorWebAPI.Services.Events;
 using Prism.Events;
 

@@ -1,10 +1,8 @@
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using NovelReformatorClassLib.Models;
-using NovelReformatorWebAPI.Data;
 using NovelReformatorWebAPI.Repositories;
 using Prism.Events;
 

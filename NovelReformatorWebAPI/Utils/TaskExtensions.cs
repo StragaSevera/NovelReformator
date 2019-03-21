@@ -6,7 +6,7 @@ namespace NovelReformatorWebAPI.Utils
     public static class TaskExtensions
     {
         /// <summary>
-        /// Casts the result type of the input task as if it were covariant
+        ///     Casts the result type of the input task as if it were covariant
         /// </summary>
         /// <typeparam name="T">The original result type of the task</typeparam>
         /// <typeparam name="TResult">The covariant type to return</typeparam>

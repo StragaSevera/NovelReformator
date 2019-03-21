@@ -8,7 +8,6 @@ namespace NovelReformatorWebAPI.Services
     public abstract class LoggerService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private HttpContext HttpContext => _httpContextAccessor.HttpContext;
 
         protected LoggerService(IEventAggregator aggregator, IHttpContextAccessor httpContextAccessor)
         {
@@ -17,6 +16,8 @@ namespace NovelReformatorWebAPI.Services
             aggregator.GetEvent<LogRequestEvent>().Subscribe(LogRequest);
             aggregator.GetEvent<LogResponseEvent>().Subscribe(LogResponse);
         }
+
+        private HttpContext HttpContext => _httpContextAccessor.HttpContext;
 
         protected abstract void LogRequest(ApiRequest request);
         protected abstract void LogResponse(ApiResponse response);

@@ -15,7 +15,7 @@
         <TextBox Text="{Binding Request}" TextWrapping="Wrap" AcceptsReturn="True"
                  Height="50"
                  HorizontalScrollBarVisibility="Disabled"
-                 VerticalScrollBarVisibility="Auto"/>
+                 VerticalScrollBarVisibility="Auto" />
         <Button Command="{Binding SendRequest}">Send Request</Button>
     </StackPanel>
 </Window>

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace NovelReformatorWebAPI.Repositories
 {
@@ -12,6 +11,8 @@ namespace NovelReformatorWebAPI.Repositories
         Task<int> SaveAsync();
         bool HasChanges();
         void Add(T model);
+        Task Update(int id, T model);
         void Remove(T model);
+        Task Remove(int id);
     }
 }

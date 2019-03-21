@@ -6,15 +6,22 @@ namespace NovelReformatorWPF.ViewModels
 {
     public class MainWindowModel : BaseViewModel
     {
+        private readonly RequestSender _requestSender;
         private string _request;
+
+        private string _response;
+
+        public MainWindowModel()
+        {
+            _requestSender = new RequestSender();
+            SendRequest = new RelayCommand(OnSendRequest);
+        }
 
         public string Request
         {
             get => _request;
             set => SetProperty(ref _request, value);
         }
-
-        private string _response;
 
         public string Response
         {
@@ -23,14 +30,6 @@ namespace NovelReformatorWPF.ViewModels
         }
 
         public ICommand SendRequest { get; }
-
-        private readonly RequestSender _requestSender;
-
-        public MainWindowModel()
-        {
-            _requestSender = new RequestSender();
-            SendRequest = new RelayCommand(OnSendRequest);
-        }
 
         private void OnSendRequest(object o)
         {

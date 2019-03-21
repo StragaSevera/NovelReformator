@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using NovelReformatorWebAPI.Utils;
 
 namespace NovelReformatorWebAPI.Repositories
@@ -44,9 +43,20 @@ namespace NovelReformatorWebAPI.Repositories
             Context.Set<TEntity>().Add(model);
         }
 
+        public async Task Update(int id, TEntity model)
+        {
+            var currentModel = await GetByIdAsync(id);
+            Context.Entry(currentModel).CurrentValues.SetValues(model);
+        }
+
         public void Remove(TEntity model)
         {
             Context.Set<TEntity>().Remove(model);
+        }
+
+        public async Task Remove(int id)
+        {
+            Remove(await GetByIdAsync(id));
         }
     }
 }
