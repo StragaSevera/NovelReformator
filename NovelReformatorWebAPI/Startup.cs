@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NovelReformatorClassLib.Models;
 using NovelReformatorWebAPI.Data;
-using NovelReformatorWebAPI.Models;
 using NovelReformatorWebAPI.Repositories;
 using NovelReformatorWebAPI.Services;
 using Prism.Events;
@@ -30,7 +30,6 @@ namespace NovelReformatorWebAPI
 
             services.AddSingleton<IEventAggregator, EventAggregator>();
             services.AddSingleton<LoggerService, DbLogger>();
-            // Не Transient, ибо требует контекста, а он Scoped
             services.AddScoped<IGenericRepository<LogEntry>, LogEntryRepository>();
         }
 

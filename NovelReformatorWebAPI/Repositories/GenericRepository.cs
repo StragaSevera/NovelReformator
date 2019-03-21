@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using NovelReformatorWebAPI.Utils;
 
 namespace NovelReformatorWebAPI.Repositories
 {
@@ -14,6 +16,13 @@ namespace NovelReformatorWebAPI.Repositories
         }
 
         protected TContext Context { get; }
+
+        public virtual Task<IReadOnlyList<TEntity>> GetAllAsync()
+        {
+            // Почему-то не работает контравариантность при простом возврате без await
+            // используем удобный Extension Method
+            return Context.Set<TEntity>().ToListAsync().AsTask<List<TEntity>, IReadOnlyList<TEntity>>();
+        }
 
         public virtual Task<TEntity> GetByIdAsync(int id)
         {

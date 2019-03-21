@@ -1,6 +1,6 @@
 using System;
 
-namespace NovelReformatorWebAPI.Models
+namespace NovelReformatorClassLib.Models
 {
     public enum LogEntryType
     {

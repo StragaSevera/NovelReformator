@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using NovelReformatorClassLib.Models;
 using NovelReformatorWebAPI.Data;
-using NovelReformatorWebAPI.Models;
 using NovelReformatorWebAPI.Repositories;
 using Prism.Events;
 

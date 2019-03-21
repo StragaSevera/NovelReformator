@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using NovelReformatorWebAPI.Models;
+using NovelReformatorClassLib.Models;
 
 namespace NovelReformatorWebAPI.Data
 {

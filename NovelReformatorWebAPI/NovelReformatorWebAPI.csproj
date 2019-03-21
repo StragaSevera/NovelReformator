@@ -15,4 +15,8 @@
       <ProjectReference Include="..\NovelReformatorClassLib\NovelReformatorClassLib.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models" />
+    </ItemGroup>
+
 </Project>

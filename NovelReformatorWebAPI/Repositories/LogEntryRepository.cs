@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
+using NovelReformatorClassLib.Models;
 using NovelReformatorWebAPI.Data;
-using NovelReformatorWebAPI.Models;
 
 namespace NovelReformatorWebAPI.Repositories
 {
