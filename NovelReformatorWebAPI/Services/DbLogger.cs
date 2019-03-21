@@ -31,7 +31,7 @@ namespace NovelReformatorWebAPI.Services
             await Log(LogEntryType.Response, response.ToString());
         }
 
-        private Task Log(LogEntryType type, string content)
+        private async Task Log(LogEntryType type, string content)
         {
             using (var scope = _scopeFactory.CreateScope())
             {
@@ -43,7 +43,7 @@ namespace NovelReformatorWebAPI.Services
                     IP = GetIp(),
                     Content = content
                 });
-                return repo.SaveAsync();
+                await repo.SaveAsync();
             }
         }
     }
