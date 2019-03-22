@@ -43,18 +43,18 @@ namespace NovelReformatorWebAPI.Repositories
             Context.Set<TEntity>().Add(model);
         }
 
-        public async Task Update(int id, TEntity model)
+        public async Task UpdateAsync(int id, TEntity model)
         {
             var currentModel = await GetByIdAsync(id);
             Context.Entry(currentModel).CurrentValues.SetValues(model);
         }
 
-        public void Remove(TEntity model)
+        private void Remove(TEntity model)
         {
             Context.Set<TEntity>().Remove(model);
         }
 
-        public async Task Remove(int id)
+        public async Task RemoveAsync(int id)
         {
             Remove(await GetByIdAsync(id));
         }

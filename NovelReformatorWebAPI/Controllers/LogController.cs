@@ -55,7 +55,7 @@ namespace NovelReformatorWebAPI.Controllers
             try
             {
                 entry.ID = id;
-                await _repository.Update(id, entry);
+                await _repository.UpdateAsync(id, entry);
                 await _repository.SaveAsync();
             }
             catch (Exception e)
@@ -72,7 +72,7 @@ namespace NovelReformatorWebAPI.Controllers
         {
             try
             {
-                await _repository.Remove(id);
+                await _repository.RemoveAsync(id);
                 await _repository.SaveAsync();
             }
             catch (Exception e)

@@ -11,8 +11,7 @@ namespace NovelReformatorWebAPI.Repositories
         Task<int> SaveAsync();
         bool HasChanges();
         void Add(T model);
-        Task Update(int id, T model);
-        void Remove(T model);
-        Task Remove(int id);
+        Task UpdateAsync(int id, T model);
+        Task RemoveAsync(int id);
     }
 }
