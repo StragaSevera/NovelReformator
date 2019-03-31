@@ -7,5 +7,6 @@ namespace NovelReformatorMVC.Services.Log
     public interface ILogService
     {
         Task<IReadOnlyList<LogEntry>> GetAllAsync();
+        Task<LogEntry> GetByIDAsync(int id);
     }
 }

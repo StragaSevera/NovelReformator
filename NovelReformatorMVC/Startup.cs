@@ -31,7 +31,10 @@ namespace NovelReformatorMVC
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}");
+            });
         }
     }
 }

@@ -5,7 +5,7 @@ using NovelReformatorClassLib.Models;
 
 namespace NovelReformatorMVC.Services.Log
 {
-    class ApiLog : ILogService
+    internal class ApiLog : ILogService
     {
         private readonly string _baseUrl;
 
@@ -22,6 +22,17 @@ namespace NovelReformatorMVC.Services.Log
             {
                 response.EnsureSuccessStatusCode();
                 return (await response.Content.ReadAsAsync<List<LogEntry>>()).AsReadOnly();
+            }
+        }
+
+        public async Task<LogEntry> GetByIDAsync(int id)
+        {
+            var url = _baseUrl + $"/{id}";
+            using (var httpClient = new HttpClient())
+            using (var response = await httpClient.GetAsync(url))
+            {
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<LogEntry>();
             }
         }
     }

@@ -32,5 +32,21 @@ namespace NovelReformatorMVC.Controllers
 
             return View(logEntries);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Index([FromQuery] int id)
+        {
+            LogEntry logEntry = null;
+            try
+            {
+                logEntry = await _logService.GetByIDAsync(id);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.ToString();
+            }
+
+            return View("IndexID", logEntry);
+        }
     }
 }
