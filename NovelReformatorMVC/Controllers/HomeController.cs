@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NovelReformatorClassLib.Models;
 using NovelReformatorMVC.Models.ViewModels;
 using NovelReformatorMVC.Services;
+using NovelReformatorMVC.Services.Reformator;
 
 namespace NovelReformatorMVC.Controllers
 {

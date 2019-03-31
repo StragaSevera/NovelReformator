@@ -12,7 +12,7 @@ namespace NovelReformatorClassLib.Models
 
         public override string ToString()
         {
-            return $"Convert to {Type}:\n{Content}";
+            return $"Convert to {Type}: {Content}";
         }
     }
 }

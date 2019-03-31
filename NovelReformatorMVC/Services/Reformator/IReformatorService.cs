@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using NovelReformatorClassLib.Models;
 
-namespace NovelReformatorMVC.Services
+namespace NovelReformatorMVC.Services.Reformator
 {
     public interface IReformatorService
     {

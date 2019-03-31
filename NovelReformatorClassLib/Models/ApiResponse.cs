@@ -11,7 +11,7 @@ namespace NovelReformatorClassLib.Models
 
         public override string ToString()
         {
-            return Success ? $"Successfully converted:\n{Content}" : "Conversion failed!";
+            return Success ? $"Successfully converted: {Content}" : "Conversion failed!";
         }
     }
 }
