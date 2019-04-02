@@ -35,5 +35,17 @@ namespace NovelReformatorMVC.Services.Log
                 return await response.Content.ReadAsAsync<LogEntry>();
             }
         }
+
+        public async Task<bool> DeleteByIDAsync(int id)
+        {
+            var url = _baseUrl + $"/{id}";
+            using (var httpClient = new HttpClient())
+            using (var response = await httpClient.DeleteAsync(url))
+            {
+                response.EnsureSuccessStatusCode();
+                var responseID = await response.Content.ReadAsAsync<int>();
+                return responseID == id;
+            }
+        }
     }
 }

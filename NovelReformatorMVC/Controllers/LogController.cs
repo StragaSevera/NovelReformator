@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NovelReformatorClassLib.Models;
 using NovelReformatorMVC.Models.ViewModels;
 using NovelReformatorMVC.Services.Log;
@@ -25,6 +26,7 @@ namespace NovelReformatorMVC.Controllers
 
         private async Task<IActionResult> ReadAll()
         {
+            ViewBag.Message = TempData["Message"];
             IReadOnlyList<LogEntry> logEntries = new List<LogEntry>();
             try
             {
@@ -35,7 +37,7 @@ namespace NovelReformatorMVC.Controllers
                 ViewBag.Error = e.ToString();
             }
 
-            return View("ReadAll", logEntries);
+            return View(nameof(ReadAll), logEntries);
         }
 
         private async Task<IActionResult> Read(int id)
@@ -50,7 +52,25 @@ namespace NovelReformatorMVC.Controllers
                 ViewBag.Error = e.ToString();
             }
 
-            return View("Read", logEntry);
+            return View(nameof(Read), logEntry);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var success = false;
+            try
+            {
+                success = await _logService.DeleteByIDAsync(id);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.ToString();
+            }
+
+            // Надо бы вынести во View
+            TempData["Message"] = success ? "The log entry was deleted" : "Log entry was not deleted!";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

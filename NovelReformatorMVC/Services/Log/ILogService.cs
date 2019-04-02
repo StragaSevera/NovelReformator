@@ -8,5 +8,6 @@ namespace NovelReformatorMVC.Services.Log
     {
         Task<IReadOnlyList<LogEntry>> GetAllAsync();
         Task<LogEntry> GetByIDAsync(int id);
+        Task<bool> DeleteByIDAsync(int id);
     }
 }

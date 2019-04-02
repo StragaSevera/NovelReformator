@@ -5,7 +5,9 @@
     <tr>
         @if (ViewBag.ShowLink)
         {
-            <td><a asp-action="Index" asp-route-id="@Model.ID">@Model.ID</a></td>
+            <td>
+                <a asp-route-id="@Model.ID">@Model.ID</a>
+            </td>
         }
         else
         {
@@ -15,5 +17,15 @@
         <td>@Model.CreatedAt</td>
         <td>@Model.IP</td>
         <td>@Model.Content</td>
+
+        <form asp-controller="Log">
+            @if (ViewBag.ShowLink)
+            {
+                <td>Edit Button</td>
+            }
+            <td>
+                <button type="submit" formmethod="post" asp-action="Delete" asp-route-id="@Model.ID">Delete</button>
+            </td>
+        </form>
     </tr>
 }
