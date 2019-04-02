@@ -1,15 +1,10 @@
 @model RequestResponseComposite
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Api Request";
+}
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Api Request</title>
-</head>
-<body>
 <a asp-controller="Log">Log</a>
 <partial name="_ReformatError.cshtml" model="ViewBag.Error"/>
 <partial name="_ReformatResponse.cshtml" model="Model.Response"/>
 <partial name="_ReformatForm.cshtml" model="Model.Request"/>
-</body>
-</html>

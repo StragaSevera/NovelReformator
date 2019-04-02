@@ -1,0 +1,19 @@
+@model LogEntry
+
+@if (Model != null)
+{
+    <tr>
+        @if (ViewBag.ShowLink)
+        {
+            <td><a asp-action="Index" asp-route-id="@Model.ID">@Model.ID</a></td>
+        }
+        else
+        {
+            <td>@Model.ID</td>
+        }
+        <td>@Model.Type</td>
+        <td>@Model.CreatedAt</td>
+        <td>@Model.IP</td>
+        <td>@Model.Content</td>
+    </tr>
+}

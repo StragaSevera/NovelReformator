@@ -1,39 +1,19 @@
 @model LogEntry
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Log Index</title>
-    <style>
-        table, thead, tr, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-    </style>
-</head>
-<body>
-<h1>Log Entry:</h1>
-<partial name="_LogError.cshtml" model="ViewBag.Error"/>
-@if (Model != null)
-{
-    <table>
-        <thead>
-        <td>ID</td>
-        <td>Type</td>
-        <td>Created at</td>
-        <td>IP</td>
-        <td>Content</td>
-        </thead>
-        <tr>
-            <td>@Model.ID</td>
-            <td>@Model.Type</td>
-            <td>@Model.CreatedAt</td>
-            <td>@Model.IP</td>
-            <td>@Model.Content</td>
-        </tr>
-    </table>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = $"Log Entry #{Model.ID}";
 }
-</body>
-</html>
+
+<h1>Log Entry:</h1>
+<partial name="_LogError" model="ViewBag.Error"/>
+<table>
+    <thead>
+    <td>ID</td>
+    <td>Type</td>
+    <td>Created at</td>
+    <td>IP</td>
+    <td>Content</td>
+    </thead>
+    @{ ViewBag.ShowLink = false; }
+    <partial name="_LogEntry" model="Model"/>
+</table>
