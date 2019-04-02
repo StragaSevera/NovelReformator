@@ -33,7 +33,8 @@ namespace NovelReformatorMVC
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("short", "{controller=Home}/{id:int?}", new {action = "Index"});
+                routes.MapRoute("default", "{controller=Home}/{action:alpha=Index}/{id:int?}");
             });
         }
     }

@@ -70,7 +70,7 @@ namespace NovelReformatorMVC.Controllers
 
             // Надо бы вынести во View
             TempData["Message"] = success ? "The log entry was deleted" : "Log entry was not deleted!";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { Id = (int?)null });
         }
     }
 }

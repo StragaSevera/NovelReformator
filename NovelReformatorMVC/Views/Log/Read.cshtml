@@ -1,7 +1,7 @@
 @model LogEntry
 @{
     Layout = "_Layout";
-    ViewBag.Title = $"Log Entry #{Model.ID}";
+    ViewBag.Title = $"Log Entry #{Model?.ID ?? -1}";
 }
 
 <h1>Log Entry:</h1>
