@@ -18,7 +18,12 @@ namespace NovelReformatorMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public Task<IActionResult> Index(int? id)
+        {
+            return id is null ? ReadAll() : Read(id.Value);
+        }
+
+        private async Task<IActionResult> ReadAll()
         {
             IReadOnlyList<LogEntry> logEntries = new List<LogEntry>();
             try
@@ -30,11 +35,10 @@ namespace NovelReformatorMVC.Controllers
                 ViewBag.Error = e.ToString();
             }
 
-            return View(logEntries);
+            return View("ReadAll", logEntries);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Index([FromQuery] int id)
+        private async Task<IActionResult> Read(int id)
         {
             LogEntry logEntry = null;
             try
@@ -46,7 +50,7 @@ namespace NovelReformatorMVC.Controllers
                 ViewBag.Error = e.ToString();
             }
 
-            return View("IndexID", logEntry);
+            return View("Read", logEntry);
         }
     }
 }
