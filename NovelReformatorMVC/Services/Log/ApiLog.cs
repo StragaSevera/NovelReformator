@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using NovelReformatorClassLib.Models;
 
 namespace NovelReformatorMVC.Services.Log
@@ -33,6 +35,18 @@ namespace NovelReformatorMVC.Services.Log
             {
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsAsync<LogEntry>();
+            }
+        }
+
+        public async Task<bool> EditByIDAsync(int id, LogEntry logEntry)
+        {
+            var url = _baseUrl + $"/{id}";
+            using (var httpClient = new HttpClient())
+            using (var response = await httpClient.PutAsync(url, new StringContent(JsonConvert.SerializeObject(logEntry), Encoding.Default, "application/json")))
+            {
+                response.EnsureSuccessStatusCode();
+                var responseID = await response.Content.ReadAsAsync<int>();
+                return responseID == id;
             }
         }
 

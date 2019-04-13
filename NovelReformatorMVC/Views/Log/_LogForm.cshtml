@@ -1,0 +1,24 @@
+@model LogEntry
+
+<form asp-action="@ViewBag.Action" method="post" asp-route-id="@Model.ID">
+    <div asp-validation-summary="All"></div>
+    <p>
+        <label asp-for="Type">Type:</label><br/>
+        <select asp-for="Type"
+                asp-items="Html.GetEnumSelectList<LogEntryType>()">
+        </select>
+    </p>
+    <p>
+        <label asp-for="CreatedAt">CreatedAt:</label><br/>
+        <input asp-for="CreatedAt" type="text"/>
+    </p>
+    <p>
+        <label asp-for="IP">IP:</label><br/>
+        <input asp-for="IP" type="text"/>
+    </p>
+    <p>
+        <label asp-for="Content">Content:</label><br/>
+        <input asp-for="Content" type="text"/>
+    </p>
+    <button type="submit">Submit</button>
+</form>

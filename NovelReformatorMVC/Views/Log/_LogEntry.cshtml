@@ -17,15 +17,19 @@
         <td>@Model.CreatedAt</td>
         <td>@Model.IP</td>
         <td>@Model.Content</td>
-
-        <form asp-controller="Log">
-            @if (ViewBag.ShowLink)
-            {
-                <td>Edit Button</td>
-            }
+        @if (ViewBag.ShowLink)
+        {
             <td>
-                <button type="submit" formmethod="post" asp-action="Delete" asp-route-id="@Model.ID">Delete</button>
+                <form asp-controller="Log" method="get" asp-action="Index" asp-route-id="@Model.ID">
+                    <button type="submit">Edit</button>
+                </form>
             </td>
-        </form>
+        }
+
+        <td>
+            <form asp-controller="Log" method="post" asp-action="Delete" asp-route-id="@Model.ID">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
 }

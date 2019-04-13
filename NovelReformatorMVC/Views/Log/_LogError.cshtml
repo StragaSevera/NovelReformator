@@ -5,3 +5,7 @@
     <h1>Error:</h1>
     <pre>@Model</pre>
 }
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p>@ViewBag.Message</p>
+}

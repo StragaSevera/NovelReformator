@@ -42,6 +42,7 @@ namespace NovelReformatorMVC.Controllers
 
         private async Task<IActionResult> Read(int id)
         {
+            ViewBag.Message = TempData["Message"];
             LogEntry logEntry = null;
             try
             {
@@ -53,6 +54,25 @@ namespace NovelReformatorMVC.Controllers
             }
 
             return View(nameof(Read), logEntry);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, LogEntry logEntry)
+        {
+            var success = false;
+            try
+            {
+                success = await _logService.EditByIDAsync(id, logEntry);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.ToString();
+            }
+
+            // Надо бы вынести во View
+            TempData["Message"] = success ? "The log entry was edited" : "Error: Log entry was not edited!";
+            return RedirectToAction(nameof(Index), new { Id = id });
         }
 
         [HttpPost]
@@ -69,7 +89,7 @@ namespace NovelReformatorMVC.Controllers
             }
 
             // Надо бы вынести во View
-            TempData["Message"] = success ? "The log entry was deleted" : "Log entry was not deleted!";
+            TempData["Message"] = success ? "The log entry was deleted" : "Error: Log entry was not deleted!";
             return RedirectToAction(nameof(Index), new { Id = (int?)null });
         }
     }
