@@ -38,6 +38,18 @@ namespace NovelReformatorMVC.Services.Log
             }
         }
 
+        public async Task<int> CreateAsync(LogEntry logEntry)
+        {
+            var url = _baseUrl;
+            using (var httpClient = new HttpClient())
+            using (var response = await httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(logEntry), Encoding.Default, "application/json")))
+            {
+                response.EnsureSuccessStatusCode();
+                var responseID = await response.Content.ReadAsAsync<int>();
+                return responseID;
+            }
+        }
+
         public async Task<bool> EditByIDAsync(int id, LogEntry logEntry)
         {
             var url = _baseUrl + $"/{id}";

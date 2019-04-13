@@ -8,6 +8,7 @@ namespace NovelReformatorMVC.Services.Log
     {
         Task<IReadOnlyList<LogEntry>> GetAllAsync();
         Task<LogEntry> GetByIDAsync(int id);
+        Task<int> CreateAsync(LogEntry logEntry);
         Task<bool> EditByIDAsync(int id, LogEntry logEntry);
         Task<bool> DeleteByIDAsync(int id);
     }

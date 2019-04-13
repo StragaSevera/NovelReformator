@@ -16,8 +16,12 @@
     <td>Content</td>
     </thead>
     @{ ViewBag.ShowLink = true; }
+    @* ReSharper disable once UnusedVariable *@
     @foreach (var entry in Model)
     {
         <partial name="_LogEntry" model="entry"/>
     }
 </table>
+<h2>New log entry:</h2>
+@{ ViewBag.Action = "Create"; }
+<partial name="_LogForm" model="@{ new LogEntry(); }"/>

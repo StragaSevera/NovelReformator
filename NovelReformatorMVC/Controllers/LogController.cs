@@ -21,7 +21,7 @@ namespace NovelReformatorMVC.Controllers
         [HttpGet]
         public Task<IActionResult> Index(int? id)
         {
-            return id is null ? ReadAll() : Read(id.Value);
+            return id is null || id < 0 ? ReadAll() : Read(id.Value);
         }
 
         private async Task<IActionResult> ReadAll()
@@ -58,6 +58,25 @@ namespace NovelReformatorMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(LogEntry logEntry)
+        {
+            int id = -1;
+            try
+            {
+                id = await _logService.CreateAsync(logEntry);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.ToString();
+            }
+
+            // Надо бы вынести во View
+            TempData["Message"] = id >= 0 ? "The log entry was created" : "Error: Log entry was not created!";
+            return RedirectToAction(nameof(Index), new {Id = id});
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, LogEntry logEntry)
         {
             var success = false;
@@ -72,7 +91,7 @@ namespace NovelReformatorMVC.Controllers
 
             // Надо бы вынести во View
             TempData["Message"] = success ? "The log entry was edited" : "Error: Log entry was not edited!";
-            return RedirectToAction(nameof(Index), new { Id = id });
+            return RedirectToAction(nameof(Index), new {Id = id});
         }
 
         [HttpPost]
@@ -90,7 +109,7 @@ namespace NovelReformatorMVC.Controllers
 
             // Надо бы вынести во View
             TempData["Message"] = success ? "The log entry was deleted" : "Error: Log entry was not deleted!";
-            return RedirectToAction(nameof(Index), new { Id = (int?)null });
+            return RedirectToAction(nameof(Index), new {Id = (int?) null});
         }
     }
 }
