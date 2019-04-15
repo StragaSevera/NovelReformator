@@ -8,14 +8,18 @@
 <partial name="_LogError" model="ViewBag.Error"/>
 <table>
     <thead>
-    <td>ID</td>
-    <td>Type</td>
-    <td>Created at</td>
-    <td>IP</td>
-    <td>Content</td>
+    <tr>
+        <td>ID</td>
+        <td>Type</td>
+        <td>Created at</td>
+        <td>IP</td>
+        <td>Content</td>
+    </tr>
     </thead>
     @{ ViewBag.ShowLink = false; }
+    <tbody>
     <partial name="_LogEntry" model="Model"/>
+    </tbody>
 </table>
 
 @{ ViewBag.Action = "Edit"; }

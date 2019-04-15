@@ -1,0 +1,4 @@
+ Простейшая грамматика
+
+ tag: <TAG_NAME> chunk </TAG_NAME>
+ chunk: (TEXT | tag)*

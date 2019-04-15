@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovelReformatorClassLib", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovelReformatorWPF", "NovelReformatorWPF\NovelReformatorWPF.csproj", "{3EAECEF6-5B8C-447F-86BE-DEF554FF5E78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovelReformatorCore", "NovelReformatorCore\NovelReformatorCore.csproj", "{BEE7E462-55D2-469C-B801-6FC7A1B04742}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovelReformatorCore.Test", "NovelReformatorCore.Test\NovelReformatorCore.Test.csproj", "{4872CA38-5A21-4155-9DF4-2995D6C16868}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{3EAECEF6-5B8C-447F-86BE-DEF554FF5E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EAECEF6-5B8C-447F-86BE-DEF554FF5E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EAECEF6-5B8C-447F-86BE-DEF554FF5E78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE7E462-55D2-469C-B801-6FC7A1B04742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE7E462-55D2-469C-B801-6FC7A1B04742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE7E462-55D2-469C-B801-6FC7A1B04742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE7E462-55D2-469C-B801-6FC7A1B04742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4872CA38-5A21-4155-9DF4-2995D6C16868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4872CA38-5A21-4155-9DF4-2995D6C16868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4872CA38-5A21-4155-9DF4-2995D6C16868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4872CA38-5A21-4155-9DF4-2995D6C16868}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
