@@ -1,4 +1,4 @@
-using NoverLeformatorCore.FanficsMe;
+using NovelReformatorCore.FanficsMe;
 using NUnit.Framework;
 
 namespace NovelReformatorCoreTest.FanficsMe
@@ -7,11 +7,11 @@ namespace NovelReformatorCoreTest.FanficsMe
     public class TokenTest
     {
         [Test]
-        public void ItExists()
+        public void StoresTypeAndValue()
         {
-            var token = new Token(TokenType.Tag, "center");
-            Assert.That(token, Is.Not.Null);
-
+            var token = new Token(TokenType.TagOpen, "center");
+            Assert.That(token.Type, Is.EqualTo(TokenType.TagOpen));
+            Assert.That(token.Value, Is.EqualTo("center"));
         }
     }
 }

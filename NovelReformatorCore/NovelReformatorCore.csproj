@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-        <RootNamespace>NoverLeformatorCore</RootNamespace>
+        <RootNamespace>NovelReformatorCore</RootNamespace>
     </PropertyGroup>
 
 </Project>
