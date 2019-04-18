@@ -81,41 +81,4 @@ namespace NovelReformatorCore.AbstractSyntaxTree
             return $"TextNode: \"{Content}\"";
         }
     }
-
-    public class TagNode : AbstractNode
-    {
-        public string Name { get; }
-        public ChunkNode Content { get; }
-
-        public TagNode(string name, ChunkNode content)
-        {
-            Name = name;
-            Content = content;
-        }
-
-        private bool Equals(TagNode other)
-        {
-            return string.Equals(Name, other.Name) && Equals(Content, other.Content);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((TagNode) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (Content != null ? Content.GetHashCode() : 0);
-            }
-        }
-
-        public override string ToString()
-        {
-            return $"TagNode: <{Name}>{Content}</{Name}>";
-        }
-    }
 }

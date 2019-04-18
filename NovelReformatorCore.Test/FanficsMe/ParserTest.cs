@@ -42,7 +42,7 @@ namespace NovelReformatorCoreTest.FanficsMe
             var treeChunk = (ChunkNode) tree;
             Assert.That(treeChunk.Children, Is.EqualTo(new List<AbstractNode>
             {
-                new TagNode("tag", new ChunkNode(new List<AbstractNode>{new TextNode("Text")}))
+                new UnknownTagNode("tag", new ChunkNode(new List<AbstractNode>{new TextNode("Text")}))
             }));
         }
 
@@ -56,10 +56,10 @@ namespace NovelReformatorCoreTest.FanficsMe
             Assert.That(treeChunk.Children, Is.EqualTo(new List<AbstractNode>
             {
                 new TextNode("Header: "),
-                new TagNode("center", new ChunkNode(new List<AbstractNode>
+                new CenterNode(new ChunkNode(new List<AbstractNode>
                 {
                     new TextNode("A "),
-                    new TagNode("b", new ChunkNode(new List<AbstractNode>{new TextNode("Test")})),
+                    new BoldNode(new ChunkNode(new List<AbstractNode>{new TextNode("Test")})),
                     new TextNode(" Header")
                 }))
             }));

@@ -2,4 +2,11 @@
 
 tree: chunk EOF
 chunk: (TEXT | tag)*
-tag: <TAG_NAME> chunk </TAG_NAME>
+tag: bold | italic | underline | strike | center | right | note
+bold: <BOLD> chunk </BOLD>
+italic: <ITALIC> chunk </ITALIC>
+underline: <UNDERLINE> chunk </UNDERLINE>
+strike: <STRIKE> chunk </STRIKE>
+center: <CENTER> chunk </CENTER>
+right: <RIGHT> chunk </RIGHT>
+note: <NOTE> chunk </NOTE>

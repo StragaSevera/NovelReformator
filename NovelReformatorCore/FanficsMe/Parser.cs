@@ -8,7 +8,7 @@ namespace NovelReformatorCore.FanficsMe
     {
         // Надо бы DI-ть, но влом
         private readonly IReadOnlyList<Token> _tokens;
-        private int _currentPosition = 0;
+        private int _currentPosition;
         private Token CurrentToken => _tokens[_currentPosition];
 
         public Parser(string text)
@@ -40,20 +40,45 @@ namespace NovelReformatorCore.FanficsMe
                         break;
                 }
             }
+
             return new ChunkNode(children);
         }
 
-        private TagNode Tag()
+        private AbstractTagNode Tag()
         {
             var tagName = CurrentToken.Value;
             Consume(TokenType.TagOpen);
+            if (IsTagSingle(tagName))
+            {
+                // TODO: Add single tag handling
+                return new UnknownTagNode(tagName, null);
+            }
+
             ChunkNode tagContent = Chunk();
             if (tagName != CurrentToken.Value)
             {
-                throw new ParsingException($"Error: tag name mismatch, expecting closing tag {tagName}, found {CurrentToken.Value}");
+                throw new ParsingException(
+                    $"Error: tag name mismatch, expecting closing tag {tagName}, found {CurrentToken.Value}");
             }
+
             Consume(TokenType.TagClose);
-            return new TagNode(tagName, tagContent);
+            // TODO: Refactor ugly switch
+            switch (tagName)
+            {
+                case "b": return new BoldNode(tagContent);
+                case "i": return new ItalicNode(tagContent);
+                case "u": return new UnderlineNode(tagContent);
+                case "s": return new StrikeNode(tagContent);
+                case "center": return new CenterNode(tagContent);
+                case "right": return new RightNode(tagContent);
+                case "note": return new NoteNode(tagContent);
+                default: return new UnknownTagNode(tagName, tagContent);
+            }
+        }
+
+        private bool IsTagSingle(string tagName)
+        {
+            return false;
         }
 
         private void Consume(TokenType tokenType)
